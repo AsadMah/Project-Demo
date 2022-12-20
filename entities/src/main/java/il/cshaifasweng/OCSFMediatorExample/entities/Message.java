@@ -35,6 +35,9 @@ public class Message implements Serializable
     public void setObject(final Object obj) {
         this.object = obj;
     }
+    public String getData(){
+        return "";
+    }
 
     @Override
     public String toString() {

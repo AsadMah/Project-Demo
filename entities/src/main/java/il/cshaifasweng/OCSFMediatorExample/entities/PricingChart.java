@@ -1,4 +1,4 @@
-package entities;
+package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
@@ -9,10 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "prices")
-public class PricingChart {
+public class PricingChart implements Serializable {
     @Column(name = "park_via_kiosk")
     private double parkViaKiosk;
     @Column(name = "one_time_purchased_ahead")

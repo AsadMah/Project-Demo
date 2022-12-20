@@ -44,7 +44,7 @@ public class PrimaryController {
 	@FXML
 	void sendMessage(ActionEvent event) {
 		try {
-			Message message = new Message(msgId++, MessageTF.getText());
+			Message message = new Message("hello", new Object());
 			MessageTF.clear();
 			SimpleClient.getClient().sendToServer(message);
 		} catch (IOException e) {
@@ -67,7 +67,7 @@ public class PrimaryController {
 	@Subscribe
 	public void getStarterData(NewSubscriberEvent event) {
 		try {
-			Message message = new Message(msgId, "send Submitters IDs");
+			Message message = new Message("#getAllParkingLots", "");
 			SimpleClient.getClient().sendToServer(message);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -80,10 +80,7 @@ public class PrimaryController {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 		Platform.runLater(() -> {
 			Alert alert = new Alert(Alert.AlertType.ERROR,
-					String.format("Message:\nId: %d\nData: %s\nTimestamp: %s\n",
-							event.getMessage().getId(),
-							event.getMessage().getMessage(),
-							event.getMessage().getTimeStamp().format(dtf))
+					String.format("Message:\nId: %d\nData: %s\nTimestamp: %s\n")
 			);
 			alert.setTitle("Error!");
 			alert.setHeaderText("Error:");
@@ -107,7 +104,7 @@ public class PrimaryController {
 		clock.setCycleCount(Animation.INDEFINITE);
 		clock.play();
 		try {
-			Message message = new Message(msgId, "add client");
+			Message message = new Message("msgId", "add client");
 			SimpleClient.getClient().sendToServer(message);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

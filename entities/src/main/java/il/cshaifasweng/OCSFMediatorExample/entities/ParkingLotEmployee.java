@@ -1,10 +1,11 @@
-package entities;
+package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "parking_lot_employee")
-public class ParkingLotEmployee {
+public class ParkingLotEmployee implements Serializable {
     private String name;
     private int age;
     private double salary;

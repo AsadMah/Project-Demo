@@ -1,9 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-import entities.ParkingLot;
-import entities.ParkingLotEmployee;
-import entities.PricingChart;
-import entities.PricingChartEnum;
+import il.cshaifasweng.OCSFMediatorExample.entities.ParkingLot;
+import il.cshaifasweng.OCSFMediatorExample.entities.ParkingLotEmployee;
+import il.cshaifasweng.OCSFMediatorExample.entities.PricingChart;
+import il.cshaifasweng.OCSFMediatorExample.entities.PricingChartEnum;
 import org.hibernate.HibernateException;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -13,17 +13,17 @@ import org.hibernate.Session;
 
 public class DataBase {
 
-    private static Session session;
+    static Session session;
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         final Configuration configuration = new Configuration();
-        configuration.addAnnotatedClass(ParkingLot.class);
-        configuration.addAnnotatedClass(PricingChartEnum.class);
+//        configuration.addAnnotatedClass(ParkingLot.class);
+//        configuration.addAnnotatedClass(PricingChartEnum.class);
         final ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
-    public void connectData() {
+    public static void connectData() {
         try {
             final SessionFactory sessionFactory = getSessionFactory();
             (DataBase.session = sessionFactory.openSession()).beginTransaction();

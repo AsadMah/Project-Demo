@@ -1,4 +1,4 @@
-package entities;
+package il.cshaifasweng.OCSFMediatorExample.entities;
 
 public enum PricingChartEnum {
 //

@@ -1,13 +1,14 @@
-package entities;
+package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
 @Table(name = "parking_lots")
-public class ParkingLot {
+public class ParkingLot implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,7 @@ public class ParkingLot {
         this.floor = floor;
         this.rowsInEachFloor = rowsInEachFloor;
         this.rowCapacity = rowCapacity;
-        spots = getNewSpots(floor,rowsInEachFloor,rowCapacity);
+        spots = new ArrayList<>();
         employees = new ArrayList<>();
     }
 
@@ -119,5 +120,9 @@ public class ParkingLot {
     public boolean addNewEmployee(ParkingLotEmployee p){
         p.setParkingLot(this);
         return employees.add(p);
+    }
+
+    public void init(){
+        spots = getNewSpots(floor,rowsInEachFloor,rowCapacity);
     }
 }

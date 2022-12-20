@@ -1,11 +1,12 @@
-package entities;
+package il.cshaifasweng.OCSFMediatorExample.entities;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "parking_spots")
-public class ParkingSpot {
+public class ParkingSpot implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -15,8 +16,6 @@ public class ParkingSpot {
     private boolean occupied;
     private String currentCarId;
     private boolean saved;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private ParkingLot parkingLot;
 
     public ParkingSpot(int row, int column, int depth) {
         this.row = row;
