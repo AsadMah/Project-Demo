@@ -2,62 +2,42 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+public class Message implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+    private String message;
+    private Object object;
 
-public class Message implements Serializable {
-    int id;
-    LocalDateTime timeStamp;
-    String message;
-    String data;
-
-    public Message(int id, LocalDateTime timeStamp, String message) {
-        this.id = id;
-        this.timeStamp = timeStamp;
-        this.message = message;
+    public Message() {
     }
 
-    public Message(int id, String message) {
-        this.id = id;
-        this.timeStamp = LocalDateTime.now();
-        this.message = message;
-        this.data = null;
+    public Message(final String msg, final Object obj) {
+        this.message = msg;
+        this.object = obj;
     }
 
-    public Message(int id, String message,String data) {
-        this.id = id;
-        this.timeStamp = LocalDateTime.now();
-        this.message = message;
-        this.data = data;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
+    public Message(final String msg) {
+        this.message = msg;
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Object getObject() {
+        return this.object;
     }
 
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setMessage(final String msg) {
+        this.message = msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setObject(final Object obj) {
+        this.object = obj;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
+    @Override
+    public String toString() {
+        return this.message;
     }
 }

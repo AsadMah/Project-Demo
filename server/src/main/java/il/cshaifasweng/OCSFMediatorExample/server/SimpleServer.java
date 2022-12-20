@@ -65,6 +65,9 @@ public class SimpleServer extends AbstractServer {
 				sendPrices(client);
 				return;
 			}
+			if(request.startsWith("#changePrices")){
+				updatePricingTable((PricingChart)message.getObject(),client);
+			}
 
 
 		} catch (IOException e) {
@@ -72,9 +75,6 @@ public class SimpleServer extends AbstractServer {
 		}
 	}
 
-	private void sendPrices(ConnectionToClient client) {
-
-	}
 
 //	@Override
 //	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -163,6 +163,33 @@ public class SimpleServer extends AbstractServer {
 		query.from(ParkingLot.class);
 		final ArrayList<ParkingLot> data = (ArrayList<ParkingLot>)(ArrayList)SimpleServer.session.createQuery(query).getResultList();
 		client.sendToClient(parkingLots);
+	}
+	public void sendPrices(ConnectionToClient client) throws IOException{
+		final CriteriaBuilder builder = SimpleServer.session.getCriteriaBuilder();
+		final CriteriaQuery<PricingChart> query = builder.createQuery(PricingChart.class);
+		query.from(PricingChart.class);
+		final ArrayList<PricingChart> data = (ArrayList<PricingChart>)(ArrayList)SimpleServer.session.createQuery(query).getResultList();
+		client.sendToClient(data.get(0));
+	}
+	private void updatePricingTable(PricingChart newChart,ConnectionToClient client) throws IOException {
+		final CriteriaBuilder builder = SimpleServer.session.getCriteriaBuilder();
+		final CriteriaQuery<PricingChart> query = builder.createQuery(PricingChart.class);
+		query.from(PricingChart.class);
+		final ArrayList<PricingChart> data = (ArrayList<PricingChart>)(ArrayList)SimpleServer.session.createQuery(query).getResultList();
+		for(PricingChart oldChart : data){
+			if(oldChart.getId() == newChart.getId()){
+				SimpleServer.session.beginTransaction();
+				oldChart.setFullSubscription(newChart.getFullSubscription());
+				oldChart.setOneTimePurchasedAhead(newChart.getOneTimePurchasedAhead());
+				oldChart.setParkViaKiosk(newChart.getParkViaKiosk());
+				oldChart.setRegularSubscription(newChart.getRegularSubscription());
+				oldChart.setRegularMultipleCars(newChart.getRegularMultipleCars());
+				SimpleServer.session.save(oldChart);
+				SimpleServer.session.flush();
+				SimpleServer.session.getTransaction().commit();
+				client.sendToClient(new Message("#RefreshAdd","refresh"));
+			}
+		}
 	}
 
 
