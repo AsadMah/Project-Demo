@@ -69,7 +69,7 @@ public class SimpleServer extends AbstractServer {
 				updatePricingTable((PricingChart)message.getObject(),client);
 			}
 
-
+		SimpleServer.session.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
