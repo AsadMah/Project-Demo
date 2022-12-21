@@ -12,7 +12,7 @@ public class ParkingLot implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     private int floor;
     private int rowsInEachFloor;
     private int rowCapacity;
@@ -45,11 +45,11 @@ public class ParkingLot implements Serializable {
 
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
