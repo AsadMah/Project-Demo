@@ -28,7 +28,7 @@ public class SimpleChatClient extends Application {
     	EventBus.getDefault().register(this);
     	client = SimpleClient.getClient();
     	client.openConnection();
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("primary"), 710, 650);
         stage.setScene(scene);
         stage.show();
     }
@@ -54,15 +54,7 @@ public class SimpleChatClient extends Application {
 
     @Subscribe
     public void onMessageEvent(MessageEvent message) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-        Platform.runLater(() -> {
-            Alert alert = new Alert(AlertType.INFORMATION,
-                    String.format("Message:\nId: %d\nData: %s\nTimestamp: %s\n")
-            );
-            alert.setTitle("new message");
-            alert.setHeaderText("New Message:");
-            alert.show();
-        });
+
     }
 
 
