@@ -47,8 +47,8 @@ public class DataBase {
 
     private static void initializeData() throws Exception {
 
-        PricingChart pricingChart = new PricingChart(PricingChartEnum.PARK_VIA_KIOSK.value, PricingChartEnum.ONE_TIME_PURCHASED_AHEAD.value,
-                PricingChartEnum.REGULAR_SUBSCRIPTION.value, PricingChartEnum.REGULAR_SUBSCRIPTION_MULIPLE_CARS.value, PricingChartEnum.FULL_SUBSCRIPTION.value);
+        PricingChart pricingChart = new PricingChart(8.0, 7.0,
+                60, 54, 72);
         DataBase.session.save(pricingChart);
         DataBase.session.flush();
 
